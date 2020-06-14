@@ -99,14 +99,13 @@ class productsController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $products = Product::findOrFail($id);
         if($products->photo){
             $originalRut = $products->photo;
             $originalFile = public_path(). "/images/". $originalRut;
             unlink($originalFile);
         }
-
         $products->delete();
         return redirect('admin/products');
     }
