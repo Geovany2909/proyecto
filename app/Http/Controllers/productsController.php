@@ -99,15 +99,15 @@ class productsController extends Controller
      */
     public function destroy($id)
     {
-        // $user = User::findOrFail($id);
-        // if ($user->foto) {
-        //     $rutaOriginal = $user->foto->ruta_foto;
-        //     $archivoOriginal = public_path() . "/images/" . $rutaOriginal;
-        //     unlink($archivoOriginal);
-        // }
-        // Session::flash('usuario_eliminado', 'El usuario ha sido eliminado con exito');
-        // $user->delete();
+        
+        $products = Product::findOrFail($id);
+        if($products->photo){
+            $originalRut = $products->photo;
+            $originalFile = public_path(). "/images/". $originalRut;
+            unlink($originalFile);
+        }
 
-        // return redirect('admin/users');
+        $products->delete();
+        return redirect('admin/products');
     }
 }
