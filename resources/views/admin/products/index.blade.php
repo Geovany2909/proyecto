@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+@extends('admin.products.layouts.plantilla')
+
 <body>
-    @if(Session::has('usuario_eliminado'))  
+    @if(Session::has('usuario_eliminado'))
        <div class="alert alert-danger">
         {{ session('usuario_eliminado') }}
         </div>
@@ -19,27 +13,23 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">foto</th>
-        <th scope="col">Rol</th>
-        <th scope="col">nombre</th>
-        <th scope="col">email</th>
+        <th scope="col">name</th>
+        <th scope="col">description</th>
         <th scope="col">creado</th>
         <th scope="col">actualizado</th>
         <th scope="col">Acciones</th>
     </tr>
-    @if (isset($users))
-        @foreach ($users as $user)
+    @if (isset($products))
+        @foreach ($products as $product)
             <tr>
-
-                <td>{{ $user->id }}</td>
-                @if ($user->foto)
-                    <td><img src="/images/{{ $user->foto->ruta_foto }}" width="150"/></td>
+                <td>{{ $product->id }}</td>
+                @if ($product->photo)
+                    <td><img src="/images/{{ $product->photo }}" width="150"/></td>
                 @else
                  <td><img src="/images/url_foto_standar.jpg" width="130"/></td>
                 @endif
-                <p style="visibility: hidden">{{ $user->role_id }}</p>
-                <td >{{ $user->role->nombre }}</td>
                 <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
+                <td>{{ $user->description }}</td>
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->updated_at }}</td>
                 <td>

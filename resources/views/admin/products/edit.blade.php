@@ -1,3 +1,4 @@
+@auth
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
            <img src="/images/{{ $user->foto ? $user->foto->ruta_foto : 'url_foto_standar.jpg' }}" width="150"/>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspclan="2">
                 {!! Form::file('foto_id'); !!}
             </td>
         </tr>
@@ -75,3 +76,5 @@
 
 </body>
 </html>
+
+@endauth

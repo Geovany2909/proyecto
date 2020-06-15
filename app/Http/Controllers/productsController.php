@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 class productsController extends Controller
 {
 
+    //solo se puede acceder a este controlador si el usuario esta autenticado
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $productos = Product::all();
-        return view('admin.products.index', compact($productos));
+        $products = Product::all();
+        return view('admin.products.index', compact($products));
     }
 
     public function create()
@@ -25,13 +31,9 @@ class productsController extends Controller
        $input = $request->all();
 
         if ($file = $request->file('photo')) {
-            $name = $file->getClientOriginalName();
-            $file->move('images', $name);
-            $photo = Product::create([
-                'photo' => $name
-            ]);
-
-            $input['photo'] = $photo;
+            $originalName = $file->getClientOriginalName();
+            $file->move('images', $originalName);
+            $input['photo'] = $originalName;
             // $photo = Foto::create(['ruta_foto' => $nombre]);
             // $entrada['foto_id'] = $foto->id;
         }
@@ -80,11 +82,7 @@ class productsController extends Controller
         if ($file = $request->file('photo')) {
             $name = $file->getClientOriginalName();
             $file->move('images', $name);
-            $photo = Product::create([
-                'photo' => $name
-            ]);
-
-            $input['photo'] = $photo;
+            $input['photo'] = $name;
         }
 
         $products->update($input);
