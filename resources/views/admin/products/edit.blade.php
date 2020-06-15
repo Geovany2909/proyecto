@@ -7,24 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Editar Usuario  </h1>
+    <h1>Editar producto  </h1>
 
-{!! Form::model($user,['method'=>'PATCH','action'=>['adminUsersController@update',$user->id],'files'=>true]) !!}
-    <table width="500" >
+{!! Form::model($product,['method'=>'PATCH','action'=>['productsController@update',$product->id],'files'=>true]) !!}
+     <table width="500" >
         <tr>
-           <img src="/images/{{ $user->foto ? $user->foto->ruta_foto : 'url_foto_standar.jpg' }}" width="150"/>
+           <img src="/images/{{ $product->photo ? $product->photo : 'url_foto_standar.jpg' }}" width="150"/>
         </tr>
         <tr>
             <td colspclan="2">
-                {!! Form::file('foto_id'); !!}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {!! Form::label('role_id', 'Rol'); !!}
-            </td>
-            <td>
-                {!! Form::text('role_id'); !!}
+                {!! Form::file('photo'); !!}
             </td>
         </tr>
         <tr>
@@ -37,41 +29,33 @@
         </tr>
         <tr>
             <td>
-                {!! Form::label('email', 'correo Electronico:'); !!}
+                {!! Form::label('descripcion', 'Descripcion:'); !!}
             </td>
             <td>
-                {!! Form::text('email'); !!}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {!! Form::label('email', 'Verificar Correo Electronico:'); !!}
-            </td>
-            <td>
-                {!! Form::text('nara'); !!}
+                {!! Form::text('description'); !!}
             </td>
         </tr>
 
         <tr>
             <td>
-                {!! Form::submit('Modificar Usuario') !!}
+                {!! Form::submit('Modificar producto') !!}
             </td>
             <td>
                 {!! Form::reset('borrar') !!}
             </td>
         </tr>
 
-    </table>
+    </table>  
 
 
 
 {!! Form::close() !!}
-
+{{--
 <div class="alert alert-danger" onclick="alert('Desea eliminar el usuario?')">
 {!! Form::model($user,['method'=>'DELETE','action'=>['adminUsersController@destroy',$user->id]]) !!}
  {!! Form::submit('Eliminar Usuario') !!}
 {!! Form::close() !!}
-</div>
+</div>  --}}
 
 
 </body>
