@@ -1,10 +1,11 @@
+@auth
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Products</title>
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -69,9 +70,9 @@ $(document).ready(function(){
                         <tr>
                             <td>
                                 @if ($p->photo)
-                                    <img src="/images/{{ $p->photo }}" width="150" class="card-img"/>
+                                    <img src="/images/{{ $p->photo }}" width="150" height="100" class="card-img"/>
                                 @else
-                                    <img src="/images/url_foto_standar.jpg" width="130" class="card-img"/>
+                                    <img src="/images/url_foto_standar.jpg" width="150" class="card-img"/>
                                 @endif
                             </td>
                             <td>{{ $p->name}}</td>
@@ -90,5 +91,12 @@ $(document).ready(function(){
         </div>
     </div>
 
+{{--
+<div class="alert alert-danger" onclick="alert('Desea eliminar el usuario?')">
+{!! Form::model($user,['method'=>'DELETE','action'=>['adminUsersController@destroy',$user->id]]) !!}
+ {!! Form::submit('Eliminar Usuario') !!}
+{!! Form::close() !!}
+</div>  --}}
 </body>
 </html>
+@endauth
