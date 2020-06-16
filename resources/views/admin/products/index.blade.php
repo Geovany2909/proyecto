@@ -15,29 +15,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
 </script>
 </head>
 <body>
@@ -56,7 +33,8 @@ $(document).ready(function(){
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>foto</th>
+                        <th>#</th>
+                        <th></th>
                         <th>Name</th>
                         <th>description</th>
 						<th>created</th>
@@ -68,11 +46,14 @@ $(document).ready(function(){
                     @if (isset($products))
                         @foreach($products as $p)
                         <tr>
+                            <td>{{ $p->id }}</td>
                             <td>
-                                @if ($p->photo)
-                                    <img src="/images/{{ $p->photo }}" width="150" height="100" class="card-img"/>
+                                @if($p->photo)
+                                    <img src="/images/{{ $p->photo }}" class="img-thumbnail card"
+                                    style="margin: 0 auto" width="140" height="80"/>
                                 @else
-                                    <img src="/images/url_foto_standar.jpg" width="150" class="card-img"/>
+                                    <img src="/images/product-photoless-standart.png" class="img-thumbnail card"
+                                    style="margin: 0 auto" width="100" height="60"/>
                                 @endif
                             </td>
                             <td>{{ $p->name}}</td>
@@ -81,7 +62,16 @@ $(document).ready(function(){
                             <td>{{ $p->updated_at }}</td>
                             <td>
                                 <a href="{{ route('products.edit', $p->id) }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                               <div>
+                                    {!! Form::open(['method'=>'DELETE', 'action'=>['productsController@destroy', $p->id]]) !!}
+                                    {{ csrf_field() }}
+
+                                    <button onclick=""
+                                    class="delete alert-heading alert-danger" style="border: hidden; color:rgb(246, 38, 38); background-color: #fff;" data-toggle="modal" type="submit"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
+
+                                    {!! Form::close() !!}
+                               </div>
+
                             </td>
                         </tr>
                         @endforeach

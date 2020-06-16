@@ -23,7 +23,7 @@
         </div>
         <!-- photo -->
         <div class="md-form ">
-             <img src="/images/{{ $product->photo ? $product->photo : 'url_foto_standar.jpg' }}"
+             <img src="/images/{{ $product->photo ? $product->photo : 'product-photoless-standart.jpg' }}"
              class="img-thumbnail card" style="margin: 0 auto" width="100" height="100"/>
         </div>
         <!-- Name -->
@@ -49,8 +49,8 @@
             </div>
         </div>
         <!-- save in button -->
-        {{-- <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Save Product</button> --}}
-        <div class="md-form text-center">
+     {{-- <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Save Product</button> --}}
+         <div class="md-form text-center">
              {!! Form::submit('Save Product', ['class'=>'btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect']) !!}
         </div>
        {!! Form::close() !!}

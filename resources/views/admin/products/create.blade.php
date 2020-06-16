@@ -30,7 +30,7 @@
                 <!-- description -->
                 <div class="md-form mt-3">
                     {!! Form::label('description', 'Description: ') !!}
-                    {!! Form::text('name', '' , ['class' => 'form-control']) !!}
+                    {!! Form::text('description', '' , ['class' => 'form-control']) !!}
                 </div>
                 <!-- photo -->
                 <div class="md-form">
