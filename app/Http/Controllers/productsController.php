@@ -87,7 +87,8 @@ class productsController extends Controller
         }
 
         $products->update($input);
-        return redirect('/admin/products');
+       // return redirect('/admin/products');
+       return redirect('admin/products')->with('notice', 'El producto ha sido actualizado');
     }
 
     /**

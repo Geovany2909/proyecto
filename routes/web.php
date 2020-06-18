@@ -11,9 +11,12 @@
 |
 */
 
+use App\Http\Controllers\productsController;
+
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('admin/products/{$id}', 'productsController@destroy')->name('delete');
 
 Auth::routes();
 

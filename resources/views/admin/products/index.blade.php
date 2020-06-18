@@ -1,92 +1,115 @@
-@auth
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Products</title>
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>User Information and Form</title>
 
+	<!--JQUERY-->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<!-- Los iconos tipo Solid de Fontawesome-->
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+	<!-- Nuestro css-->
+    <link rel="stylesheet" href="{{ asset('css/prueba.css') }}">
+    <script src="{{ asset('js/laravel.js') }}"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        //Asegurate que el id que le diste a la tabla sea igual al texto despues del simbolo #
+        $('#userList').DataTable();
+    } );
 </script>
 </head>
 <body>
-    <div class="container">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-6">
-						<h2>Manage <b>Products</b></h2>
-					</div>
-					<div class="col-sm-6">
-						 <a href="{{ route('products.create') }}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-					</div>
+    <!-- Mucho mucho codigo aqui-->
+<div class="container">
+      @if(Session::has('notice'))
+       <p> <strong> {{ Session::get('notice') }} </strong> </p>
+    @endif
+
+		<div class="tab-content" id="myTabContent"  style="margin-top: 5%;">
+			<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+            <div class="card">
+            <div class="card-header">
+                <h4>Lista de Productos</h4>
+            </div>
+            <div class="card-body" style="">
+                <div class="table-responsive">
+                    <table id="userList" class="table table-bordered table-hover table-striped">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Creado</th>
+                                <th scope="col">Actualizado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @if ($products->count())
+                                 @foreach ($products as $product)
+                                    <tr>
+                                        <th scope="row">{{ $product->id }}</th>
+                                        <td>
+                                            @if ($product->photo)
+                                            <img src="/images/{{ $product->photo }}" class="card-img">
+                                            @else
+                                                <img src="/images/product-photoless-standart.png    " class="card-img">
+                                            @endif
+                                        </td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->description }}</td>
+                                        <td>{{ $product->category }}</td>
+                                        <td>{{ $product->created_at }}</td>
+                                        <td >{{ $product->updated_at }}</td>
+                                        <td>
+                                            <a href="{{ route('products.edit', $product->id) }}"><i class="fas fa-edit"></i></a> |
+
+                                                {!! Form::open(['method'=>'DELETE', 'action'=>['productsController@destroy', $product->id]]) !!}
+                                                @csrf
+                                                
+                                                 <button class="delete alert-heading alert-danger"
+                                                 style="border: 0; border-radius: 50%; color:rgb(246, 38, 38); "
+                                                  data-toggle="modal" type="submit">
+                                                  <i class="fas fa-trash"></i>
+                                                </button>
+
+                                                {!! Form::close() !!}
+                                                </div>
+                                            </a>
+
+
+                                        </td>
+                                    </tr>
+                                 @endforeach
+                                @endif
+                            </tbody>
+                    </table>
                 </div>
             </div>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th></th>
-                        <th>Name</th>
-                        <th>description</th>
-						<th>created</th>
-                        <th>updated</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (isset($products))
-                        @foreach($products as $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>
-                                @if($p->photo)
-                                    <img src="/images/{{ $p->photo }}" class="img-thumbnail card"
-                                    style="margin: 0 auto" width="140" height="80"/>
-                                @else
-                                    <img src="/images/product-photoless-standart.png" class="img-thumbnail card"
-                                    style="margin: 0 auto" width="100" height="60"/>
-                                @endif
-                            </td>
-                            <td>{{ $p->name}}</td>
-                            <td>{{ $p->description }}</td>
-                            <td>{{ $p->created_at }}</td>
-                            <td>{{ $p->updated_at }}</td>
-                            <td>
-                                <a href="{{ route('products.edit', $p->id) }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                               <div>
-                                    {!! Form::open(['method'=>'DELETE', 'action'=>['productsController@destroy', $p->id]]) !!}
-                                    {{ csrf_field() }}
-
-                                    <button onclick=""
-                                    class="delete alert-heading alert-danger" style="border: hidden; color:rgb(246, 38, 38); background-color: #fff;" data-toggle="modal" type="submit"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-
-                                    {!! Form::close() !!}
-                               </div>
-
-                            </td>
-                        </tr>
-                        @endforeach
-                     @endif
-                </tbody>
-            </table>
         </div>
-    </div>
-
-{{--
-<div class="alert alert-danger" onclick="alert('Desea eliminar el usuario?')">
-{!! Form::model($user,['method'=>'DELETE','action'=>['adminUsersController@destroy',$user->id]]) !!}
- {!! Form::submit('Eliminar Usuario') !!}
-{!! Form::close() !!}
-</div>  --}}
+        </div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
-@endauth
