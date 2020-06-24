@@ -16,9 +16,10 @@ use App\Http\Controllers\productsController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('admin/users/showInfo', function () {
+    return view('admin.users.showInfo');
+})->name('info');
 Route::get('admin/products/{$id}', 'productsController@destroy')->name('delete');
-
 Auth::routes();
-
 Route::get('admin/home', 'HomeController@index')->name('home');
 Route::resource('admin/products', 'productsController');

@@ -48,7 +48,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
                             {{ Auth::user()->name }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="{{ route('info') }}"><i class="fa fa-user"></i> Profile</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
