@@ -1,23 +1,33 @@
-@extends('layouts.app')
+@auth
+@extends('admin.products.layouts.pantilla')
+    @section('title')
+    Inicio
+    @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Panel de administracion</div>
+    <div id="wrapper">
+        <div id="page-wrapper">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Dashboard</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+                    </ol>
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Welcome to SB Admin by <a class="alert-link" href="http://startbootstrap.com">Start
+                            Bootstrap</a>! Feel free to use this template for your admin needs! We are using a few
+                        different plugins to handle the dynamic tables and charts, so make sure you check out the
+                        necessary documentation links provided.
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </div><!-- /.row -->
+
+        </div><!-- /#page-wrapper -->
+
+    </div><!-- /#wrapper -->
 @endsection
+
+@endauth

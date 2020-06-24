@@ -1,44 +1,74 @@
 @auth
-@extends('admin.products.layouts.plantilla')
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-<div class="container contact-form border border-primary rounded" id="form">
-     {!! Form::model($product,['method'=>'PATCH','action'=>['productsController@update',$product->id],'files'=>true]) !!}
-            <div class="contact-image">
-                <img src="/images/{{ $product->photo ? $product->photo : 'product-photoless-standart.jpg' }}"
-            </div>
-            {!! Form::close() !!}
-            {!! Form::model($product,['method'=>'PATCH','action'=>['productsController@update',$product->id],'files'=>true]) !!}
-                <h3>Edit this product with id {{ $product->id }}</h3>
-               <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::text('name', $product->name , ['required','class' => 'form-control','placeholder'=>'Nombre*']) !!}
-                        </div>
-                        <div class="form-group">
-                      {!! Form::select('category',
-                       [
-                            $product->category => $product->category,
-                            'Ortesis' => 'Ortesis',
-                            'Protesis' => 'Protesis'],
-                       null,
-                        ['class'=>'form-control', 'required'] ) !!}
-                        </div>
-                        <div class="form-group custom-file">
-                           {!! Form::file('photo', ['class'=>'custom-file-input form-control']) !!}
-                            <label class="custom-file-label" for="customFile">Seleccionar Archivo</label>
-                        </div>
-
-                        <div class="form-group" style="margin-top: 5%">
-                            <input type="submit" name="btnSubmit" class="btnContact" value="Edit This product!" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::textarea('description', $product->description, ['class'=>'form-control', 'placeholder'=>'Descripcion*', ]) !!}
-                        </div>
-                    </div>
+    @extends('admin.products.layouts.pantilla')
+    @section('title')
+    Edit product
+    @endsection
+    @section('content')
+     <div id="wrapper">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Dashboard</h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i>
+                                Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Edit product
+                        </li>
+                    </ol>
                 </div>
-            {!! Form::close() !!}
-</div>
-@endauth
+            </div>
+            <!-- /.row -->
+            <div class="col-lg-12">
+                 {!! Form::model($product,['method'=>'PATCH','action'=>['productsController@update',$product->id],'files'=>true]) !!}
+                 @csrf
+                    <div class="form-group mx-auto d-block">
+                        <img style="margin-left: 38%;"
+                            src="/images/{{ $product->photo ? $product->photo : 'product-photoless-standart.png' }}"
+                            width="160" height="100" alt="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Name of product</label>
+                        <input class="form-control" value="{{ $product->name }}" placeholder="Enter name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select  class="form-control">
+                            <option value="{{ $product->category }}">{{ $product->category }}</option>
+                            <option value="Protesis">Protesis</option>
+                            <option value="Ortesis">Ortesis</option>
+                            <option value="Ortesis inferior">Ortesis inferior</option>
+                            <option value="Protesis Superior">Protesis Superior</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Foto actual "{{ $product->photo }}"</strong>, Modificar?</label>
+                        <input type="file" placeholder="" class="form-control" accept="image/*" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description of product</label>
+                        <textarea class="form-control" rows="3">{{ $product->description }}</textarea>
+                    </div>
+
+                    <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn btn-success">
+                        Edit Product
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        Reset
+                    </button>
+                    </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    @endsection
+  @endauth

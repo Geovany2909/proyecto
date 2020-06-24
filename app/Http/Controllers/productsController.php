@@ -17,8 +17,7 @@ class productsController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('admin.products.index', ['products'=>$products]);
-        // return view('admin.products.index', compact($products));
+        return view('admin.products.index', compact('products'));
     }
 
     public function create()
@@ -39,7 +38,7 @@ class productsController extends Controller
             // $entrada['foto_id'] = $foto->id;
         }
         Product::create($input);
-        return redirect('/admin/products');
+        return redirect('/admin/products')->with('noticeA', 'El usuario fue creado correctamente');
 
     }
 
@@ -64,7 +63,7 @@ class productsController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        return view('admin.products.edit', ["product"=>$product]);
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -88,7 +87,7 @@ class productsController extends Controller
 
         $products->update($input);
        // return redirect('/admin/products');
-       return redirect('admin/products')->with('notice', 'El producto ha sido actualizado');
+       return redirect('admin/products')->with('noticeU', 'El producto ha sido actualizado');
     }
 
     /**
@@ -99,7 +98,6 @@ class productsController extends Controller
      */
     public function destroy($id)
     {
-
         $products = Product::findOrFail($id);
         if($products->photo){
             $originalRut = $products->photo;
@@ -107,6 +105,6 @@ class productsController extends Controller
             unlink($originalFile);
         }
         $products->delete();
-        return redirect('admin/products');
+        return redirect('admin/products')->with('noticeD', 'El usuario fue eliminado correctamente');
     }
 }
