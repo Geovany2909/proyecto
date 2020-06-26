@@ -39,15 +39,18 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li><a href="{{ route('products.index') }}"><i class="fa fa-table"></i> Products</a></li>
+                    <li><a href="{{ route('products.index') }}"><i class="fa fa-table"></i> Admin Products</a></li>
                     <li><a href="{{ route('products.create') }}"><i class="fa fa-edit"></i> Create Products</a></li>
+                    <li><a href="{{ route('users.index') }}"><i class="fa fa-table"></i> Admin Users</a></li>
+                    <li><a href="{{ route('users.create') }}"><i class="fa fa-edit"></i> Create Users</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right navbar-user">
 
                     <li class="dropdown user-dropdown">
+                        {{--  <img src="/images/{{ auth()->user()->photo ? auth()->user()->photo : 'user-photo-default.png' }}" width="80" alt="profile-image" />   --}}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                            {{ Auth::user()->name }} <b class="caret"></b></a>
+                                   {{ Auth::user()->name }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('info') }}"><i class="fa fa-user"></i> Profile</a></li>
                             <li class="divider"></li>
@@ -70,12 +73,12 @@
 @yield('content')
 @yield('Mensaje')
 
-<script src="{{ asset('js/jquery-1.10.2.js') }}"></script>
-<script src="{{ asset('js/bootstrap.js') }}"></script>
-<script src="{{ asset('js/datatable.js') }}"></script>
-<script src="{{ asset('js/alertify.min.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+    <script src="{{ asset('js/jquery-1.10.2.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/datatable.js') }}"></script>
+    <script src="{{ asset('js/alertify.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 </body>
 </html>

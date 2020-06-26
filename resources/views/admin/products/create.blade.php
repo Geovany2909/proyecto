@@ -24,17 +24,27 @@
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
+                @if ($errors->any())
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                  {!! Form::open(['action'=>'productsController@store','files'=>'true']) !!}
                     @csrf
                     <div class="form-group">
                         <label>Name of product</label>
-                        <input name="name" class="form-control" placeholder="Enter name" />
+                        <input name="name" class="form-control" value="{{ old('name') }}" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
                         <label>Category</label>
                         <select name="category" class="form-control">
-                            <option value="">Seleccione una opcion</option>
+                            <option value=" ">Seleccione una opcion </option>
                             <option value="Protesis">Protesis</option>
                             <option value="Ortesis">Ortesis</option>
                             <option value="Ortesis inferior">Ortesis inferior</option>

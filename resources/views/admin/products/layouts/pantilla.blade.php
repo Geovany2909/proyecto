@@ -38,8 +38,10 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li><a href="{{ route('products.index') }}"><i class="fa fa-table"></i> Products</a></li>
+                    <li><a href="{{ route('products.index') }}"><i class="fa fa-table"></i> Admin Products</a></li>
                     <li><a href="{{ route('products.create') }}"><i class="fa fa-edit"></i> Create Products</a></li>
+                    <li><a href="{{ route('users.index') }}"><i class="fa fa-table"></i> Admin Users</a></li>
+                    <li><a href="{{ route('users.create') }}"><i class="fa fa-edit"></i> Create Users</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right navbar-user">

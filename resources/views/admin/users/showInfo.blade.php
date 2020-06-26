@@ -12,7 +12,11 @@
                     <div class="card-content">
                     <h2>{{ auth()->user()->name }}<small>Admin</small></h2>
                     <h5><small>{{ auth()->user()->email }}</small></h5>
-                    <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div>
+                    <div class="icon-block">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"> <i class="fa fa-twitter"></i></a>
+                        <a href="#"> <i class="fa fa-google-plus"></i></a>
+                    </div>
                     </div>
                 </div>
             </div>

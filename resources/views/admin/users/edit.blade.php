@@ -15,46 +15,36 @@
                                 Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-dashboard"></i> Edit product
+                            <i class="fa fa-dashboard"></i> Edit user
                         </li>
                     </ol>
                 </div>
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
-                 {!! Form::model($product,['method'=>'PATCH','action'=>['productsController@update',$product->id],'files'=>true]) !!}
+                 {!! Form::model($users,['method'=>'PATCH','action'=>['usersController@update',$users->id],'files'=>true]) !!}
                  @csrf
                     <div class="form-group mx-auto d-block">
                         <img style="margin-left: 38%;"
-                            src="/images/{{ $product->photo ? $product->photo : 'product-photoless-standart.png' }}"
-                            width="160" height="100" alt="" />
+                            src="/images/{{ $users->photo ? $users->photo : 'user-photo-default.png' }}"
+                            width="130" height="100" alt="" />
                     </div>
 
                     <div class="form-group">
-                        <label>Name of product</label>
-                        <input class="form-control" value="{{ $product->name }}" placeholder="Enter name" />
+                        <label>UserName</label>
+                        <input class="form-control" value="{{ $users->name }}" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
-                        <label>Category</label>
-                        <select  class="form-control">
-                            <option value="{{ $product->category }}">{{ $product->category }}</option>
-                            <option value="Protesis">Protesis</option>
-                            <option value="Ortesis">Ortesis</option>
-                            <option value="Ortesis inferior">Ortesis inferior</option>
-                            <option value="Protesis Superior">Protesis Superior</option>
-                        </select>
+                        <label>Email</label>
+                        <input type="email" class="form-control" value="{{ $users->email }}" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
-                        <label><strong>Foto actual "{{ $product->photo }}"</strong>, Modificar?</label>
-                        <input type="file" placeholder="" class="form-control" accept="image/*" />
+                        <label><strong>Foto actual "{{ $users->photo }}"</strong>, Modificar?</label>
+                        <input type="file" placeholder="" name="photo" class="form-control" accept="image/*" />
                     </div>
 
-                    <div class="form-group">
-                        <label>Description of product</label>
-                        <textarea class="form-control" rows="3">{{ $product->description }}</textarea>
-                    </div>
 
                     <div class="col-lg-12 text-center">
                     <button type="submit" class="btn btn-success">
@@ -67,8 +57,6 @@
                 {!! Form::close() !!}
             </div>
         </div>
-        <!-- /#page-wrapper -->
     </div>
-    <!-- /#wrapper -->
     @endsection
   @endauth

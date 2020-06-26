@@ -1,7 +1,7 @@
 @auth
-@extends('admin.products.layouts.pantilla')
+@extends('admin.users.layouts.pantilla')
     @section('title')
-    create products
+    Create Users
     @endsection
 
     @section('content')
@@ -17,39 +17,33 @@
                                 Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-dashboard"></i> Create products
+                            <i class="fa fa-dashboard"></i> Create Users
                         </li>
                     </ol>
                 </div>
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
-                 {!! Form::open(['action'=>'productsController@store','files'=>'true']) !!}
+                 {!! Form::open(['action'=>'usersController@store','files'=>'true']) !!}
                     @csrf
                     <div class="form-group">
-                        <label>Name of product</label>
+                        <label>Username</label>
                         <input name="name" class="form-control" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
-                        <label>Category</label>
-                        <select name="category" class="form-control">
-                            <option value="">Seleccione una opcion</option>
-                            <option value="Protesis">Protesis</option>
-                            <option value="Ortesis">Ortesis</option>
-                            <option value="Ortesis inferior">Ortesis inferior</option>
-                            <option value="Protesis Superior">Protesis Superior</option>
-                        </select>
+                        <label>email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter email" />
                     </div>
 
                     <div class="form-group">
-                        <label>Add Photo</label>
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter pass" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Add photo</label>
                         <input name="photo" type="file" accept="image/*" class="form-control-file" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>Description of product</label>
-                        <textarea name="description" class="form-control" rows="3"></textarea>
                     </div>
 
                     <div class="col-lg-12 text-center">

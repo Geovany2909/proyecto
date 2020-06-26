@@ -48,12 +48,13 @@
 
                     <div class="form-group">
                         <label><strong>Foto actual "{{ $product->photo }}"</strong>, Modificar?</label>
-                        <input type="file" placeholder="" class="form-control" accept="image/*" />
+
+                        <input type="file" placeholder="" name="photo" class="form-control" accept="image/*" />
                     </div>
 
                     <div class="form-group">
                         <label>Description of product</label>
-                        <textarea class="form-control" rows="3">{{ $product->description }}</textarea>
+                        <textarea class="form-control" name="description" rows="3">{{ $product->description }}</textarea>
                     </div>
 
                     <div class="col-lg-12 text-center">

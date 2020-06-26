@@ -69,7 +69,7 @@
                                         width="100" height="100" alt="">
                                 </td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->description }}v</td>
+                                <td>{{ $product->description }}</td>
                                 <td>{{ $product->category }}</td>
                                 <td>{{ $product->created_at }}</td>
                                 <td> {{ $product->updated_at }}</td>
@@ -78,14 +78,16 @@
                                                  <a href="{{ route('products.edit', $product->id) }}" class="edit" data-toggle="modal"><i
                                                         class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                             | &nbsp;
-                                                <a href="{{ route('products.destroy', $product->id) }}" onclick="event.preventDefault();
+                                                            <a href="{{ route('products.destroy', $product->id) }}" class="delete" data-toggle="modal"><i
+                                                        class="material-icons" data-toggle="tooltip" title="delete">&#xE872;</i></a>
+                                                {{--  <a href="{{ route('products.destroy', $product->id) }}" onclick="event.preventDefault();
                                                     document.getElementById('delete-form').submit();" class="delete" data-toggle="modal"><i
-                                                    class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                    class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>  --}}
 
                                 </td>
-                                 {!! Form::open(['method'=>'DELETE','id'=>'delete-form', 'action'=>['productsController@destroy', $product->id]]) !!}
+                                 {{--  {!! Form::open(['method'=>'DELETE','id'=>'delete-form', 'action'=>['productsController@destroy', $product->id]]) !!}
                                                 @csrf
-                                {!! Form::close() !!}
+                                {!! Form::close() !!}  --}}
                             </tr>
                             @empty
                                 @section('Mensaje')

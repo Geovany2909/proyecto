@@ -28,8 +28,15 @@ class productsController extends Controller
 
     public function store(Request $request)
     {
+        $input = $request->validate(
+            [
+                'name'=> 'required|max:255',
+                'category'=>'required',
+                'description'=> 'required',
+                'photo'=>'image'
+            ]
+        );
        $input = $request->all();
-
         if ($file = $request->file('photo')) {
             $originalName = $file->getClientOriginalName();
             $file->move('images', $originalName);
@@ -50,7 +57,8 @@ class productsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.products.destroy', compact('product'));
     }
 
     /**
@@ -62,8 +70,8 @@ class productsController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-
         return view('admin.products.edit', compact('product'));
+
     }
 
     /**
@@ -75,8 +83,7 @@ class productsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $products = Product::findOrfail($id);
-
+        $products = Product::findOrFail($id);
         $input = $request->all();
 
         if ($file = $request->file('photo')) {
@@ -86,7 +93,6 @@ class productsController extends Controller
         }
 
         $products->update($input);
-       // return redirect('/admin/products');
        return redirect('admin/products')->with('noticeU', 'El producto ha sido actualizado');
     }
 
@@ -105,6 +111,6 @@ class productsController extends Controller
             unlink($originalFile);
         }
         $products->delete();
-        return redirect('admin/products')->with('noticeD', 'El usuario fue eliminado correctamente');
+        return redirect('admin/products')->with('noticeD', 'El producto fue eliminado correctamente');
     }
 }
