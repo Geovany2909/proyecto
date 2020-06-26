@@ -41,7 +41,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label><strong>Foto actual "{{ $users->photo }}"</strong>, Modificar?</label>
+                        @if($users->photo)
+                            <label><strong>Foto actual "{{ $users->photo }}"</strong>, Modificar?</label>
+                            @else
+                            <label><strong>Add photo ?</label>
+                        @endif
                         <input type="file" placeholder="" name="photo" class="form-control" accept="image/*" />
                     </div>
 

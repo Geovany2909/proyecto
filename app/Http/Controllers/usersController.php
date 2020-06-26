@@ -27,6 +27,13 @@ class usersController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input = $request->validate([
+            'name'=>['required'],
+            'email'=>['required', 'regex:/^.+@.+$/i', 'unique:users,email'],
+            "password"=>['required', 'min:8'],
+            "repeat_password"=>['required', 'same:password'],
+            'photo'=> 'mimes:jpeg,bmp,png'
+        ]);
 
         if ($file = $request->file('photo')) {
             $originalName = $file->getClientOriginalName();
@@ -38,7 +45,7 @@ class usersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-        Product::create($input);
+        User::create($input);
         return redirect('admin/users')->with('noticeA', 'El usuario fue creado correctamente');
     }
 

@@ -1,7 +1,7 @@
 @auth
 @extends('admin.products.layouts.pantilla')
 @section('title')
-    List of product
+    List of Users
 @endsection
     @section('content')
         <div id="wrapper">
@@ -29,7 +29,7 @@
                     <h1>Products</h1>
                     <ol class="breadcrumb">
                         <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                        <li class="active"><i class="fa fa-edit"></i> List of Products</li>
+                        <li class="active"><i class="fa fa-edit"></i> List of Users</li>
                     </ol>
                 </div>
             </div><!-- /.row -->
@@ -71,9 +71,11 @@
 
                                        <a href="{{ route('users.edit', $user->id) }}" class="edit" data-toggle="modal"><i
                                                         class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                            | &nbsp;
-                                                            <a href="{{ route('users.destroy', $user->id) }}" class="delete" data-toggle="modal"><i
+                                         @if (!(auth()->user()->id == $user->id))
+                                                    <a href="{{ route('users.destroy', $user->id) }}" class="delete" data-toggle="modal"><i
                                                         class="material-icons" data-toggle="tooltip" title="delete">&#xE872;</i></a>
+                                        @endif
+
                                                 {{--  <a href="{{ route('users.destroy', $user->id) }}" onclick="event.preventDefault();
                                                     document.getElementById('delete-form').submit();" class="delete" data-toggle="modal"><i
                                                     class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>  --}}

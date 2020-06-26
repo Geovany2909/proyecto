@@ -24,21 +24,35 @@
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
+                @if ($errors->any())
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                  {!! Form::open(['action'=>'usersController@store','files'=>'true']) !!}
                     @csrf
                     <div class="form-group">
                         <label>Username</label>
-                        <input name="name" class="form-control" placeholder="Enter name" />
+                        <input name="name"    value="{{ old('name') }}" class="form-control" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
                         <label>email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter email" />
+                        <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Enter email" />
                     </div>
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Enter pass" />
+                        <input type="password" value="{{ old('password') }}" name="password" class="form-control" placeholder="Enter pass" />
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm password</label>
+                        <input type="password"  name="repeat_password" class="form-control" placeholder="Enter pass" />
                     </div>
 
                     <div class="form-group">
