@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\productsController;
+use App\Product;
 
 Route::get('/', function () {
-    return view('welcome');
+    $product = Product::all();
+    return view('welcome', compact('product'));
 });
 
 //ruta que sirve para ver la informacion del usuario logeado

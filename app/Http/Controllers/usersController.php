@@ -28,24 +28,21 @@ class usersController extends Controller
     {
         $input = $request->all();
         $input = $request->validate([
-            'name'=>['required'],
+            'name'=>['required', 'max:100'],
             'email'=>['required', 'regex:/^.+@.+$/i', 'unique:users,email'],
             "password"=>['required', 'min:8'],
             "repeat_password"=>['required', 'same:password'],
-            'photo'=> 'mimes:jpeg,bmp,png'
+            'photo'=> 'mimes:jpeg,bmp,png,jpg'
         ]);
 
         if ($file = $request->file('photo')) {
-            $originalName = $file->getClientOriginalName();
-            $file->move('images', $originalName);
-            $input['photo'] = $originalName;
+            $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
+            $file->move('images', $temp_name);
+            $input['photo'] = $temp_name;
         }
-
-        if($input['password']){
-            $input['password'] = bcrypt($request->password);
-        }
-
+        $input['password'] = bcrypt($request->password);
         User::create($input);
+
         return redirect('admin/users')->with('noticeA', 'El usuario fue creado correctamente');
     }
 
@@ -67,9 +64,15 @@ class usersController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('photo')) {
-            $name = $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['photo'] = $name;
+            if ($users->photo) {
+                $originalRut = $users->photo;
+                $originalFile = public_path() . "/images/" . $originalRut;
+                unlink($originalFile);
+            }
+
+            $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
+            $file->move('images', $temp_name);
+            $input['photo'] = $temp_name;
         }
         $users->update($input);
         return redirect('admin/users')->with('noticeU', 'El usuario ha sido actualizado exitosamente');
@@ -85,5 +88,15 @@ class usersController extends Controller
         }
         $users->delete();
         return redirect('admin/users')->with('noticeD', 'El usuario fue eliminado correctamente');
+    }
+
+    protected function random_string()
+    {
+        $key = '';
+        $keys = array_merge(range('a', 'z'), range(0, 15));
+        for ($i = 0; $i < 15; $i++) {
+            $key .= $keys[array_rand($keys)];
+        }
+        return $key;
     }
 }
