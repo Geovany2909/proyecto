@@ -7,6 +7,7 @@ Route::get('/', function () {
     $product = Product::all();
     return view('mio', compact('product'));
 })->name('root');
+
 Route::get('/productos', function () {
     $product = Product::all();
     return view('productos', compact('product'));
