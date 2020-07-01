@@ -25,7 +25,7 @@
                     <div class="card-content">
                     <h4>name: {{ $user->name }}</h4>
                     <h5>email: {{ $user->email }}</h5>
-                    <h5>create: {{ $user->created_at }}</h5>
+                    <h5>create: {{ date('d-M-Y', strtotime($user->created_at)) }}</h5>
                     <div class="icon-block">
                         {!! Form::open(['method'=>'DELETE','id'=>'delete-form', 'action'=>['usersController@destroy', $user->id]]) !!}
                                                 @csrf

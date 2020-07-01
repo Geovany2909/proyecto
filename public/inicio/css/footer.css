@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+@import url('colores.css');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer{
+    background: #fff;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer ul li{
+    list-style: none;
+}
+
+.footer ul li a{
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.footer ul li a img{
+    max-width: 20px;
+}
+
+.footer div img{
+    max-width: 50px;
+    margin-left: 50%;
+}
+
+.txt2{
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color:#115294;
+    text-align: center;
+}
+
+.txt3{
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: center;
+}
+
+.txt4{
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: center;
+}
+
+.fot{
+    padding: 20px;
+    border-top: solid 1px #115294;
+}
+
+.fot p{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #000;
+    font-weight: 400;
+    text-align: center;
+}
+
+.foot{
+    padding: 10px;
+    background:#115294;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+}

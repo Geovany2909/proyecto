@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.about{
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+/*#63b0b8*/
+.about .cont{
+    background: #fff;
+    padding: 50px;
+    width: 70%;
+}
+
+.heading{
+    color: #abcc00;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.txt{
+    color: #000;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.btn{
+    border: 1px solid #07396c;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn3{
+    color: #07396c;
+}
+
+.btn3:hover{
+    color: #fff;
+    background: #07396c;
+}
+
+.about .img{
+    padding: 50px;
+    width: 30%;
+}
+
+/*#27848b*/
+.prod{
+    background: #fff;
+    padding: 100px;
+    text-align: center;
+}
+
+.prod .container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.prod .container .prodBx{
+    position: relative;
+    background: #e7e2e2;
+    width: 320px;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prod .container .prodBx img{
+    max-width: 90%;
+}
+
+.prod .container .prodBx h2{
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+/*#63b0b8*/
+.cont{
+    padding: 100px;
+    background: #fff;
+    text-align: center;
+}
+
+.contact-info{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card{
+    position: relative;
+    flex: 1;
+    max-width: 380px;
+    height: 210px;
+    background-color: #061b3a;
+    margin: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon{
+    font-size: 32px;
+    color: #abcc00;
+    transition: .3s linear;
+}
+
+.card:hover .icon{
+    transform: scale(4);
+    opacity: 0;
+}
+
+.card-content h3,
+.card-content span{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+}
+
+.card-content h3{
+    top: 20px;
+    text-transform: uppercase;
+    color: #abcc00;
+}
+
+.card-content span{
+    bottom: 20px;
+    color: #63b0b8;
+    font-weight: 500;
+}
+
+.card:hover h3{
+    opacity: 1;
+    top: 46px;
+    transition: .3s linear .3s;
+}
+
+.card:hover span{
+    opacity: 1;
+    bottom: 46px;
+    transition: .3s linear .3s;
+}
+
+
+@media screen and (max-width:900px){
+    .card{
+        flex: 100%;
+        max-width: 500px;
+    }
+}
+
+ /*rgb(222, 28, 65)  #ec6f2f*/
+.about .cont2{
+    background: #ffffff;
+    padding: 20px;
+    width: 50%;
+}
+
+.heading2{
+    color: #abcc00;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 5%;
+    margin-bottom: 10px;
+}
+
+.img2{
+    background: url(../img/c2.jpg);
+    background-size: cover;
+    background-position: left;
+    width: 50%;
+}
+
+.form .inputBx{
+    margin-bottom: 40px;
+}
+
+.form .inputBx input{
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 300;
+    color: #061b3a;
+    border-bottom: 2px solid #061b3a;
+}
+
+.form .inputBx input::placeholder{
+    color: #061b3a;
+}
+
+.form .inputBx textarea{
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 300;
+    color: #061b3a;
+    border-bottom: 2px solid #061b3a;
+    min-height: 150px;
+}
+
+.form .inputBx textarea::placeholder{
+    color: #061b3a;
+}
+
+.form .inputBx input[type="submit"]{
+    width: 150px;
+    background: #061b3a;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 400;
+    border: solid 1px #061b3a;
+}
+
+.form .inputBx input[type="submit"]:hover{
+    color: #061b3a;
+    background: transparent;
+    transition: 0.5s;
+    border: 1px solid #061b3a;
+}

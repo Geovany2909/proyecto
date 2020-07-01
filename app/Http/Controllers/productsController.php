@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\ValidateFormProducts;
 
 class productsController extends Controller
 {
@@ -26,24 +28,17 @@ class productsController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ValidateFormProducts $request)
     {
         $input = $request->all();
-        $input = $request->validate(
-            [
-                'name' => 'required|max:255',
-                'category' => 'required',
-                'description' => 'required',
-                'photo' => 'image'
-            ]
-        );
         if ($file = $request->file('photo')) {
             $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
             $file->move('images', $temp_name);
             $input['photo'] = $temp_name;
         }
         Product::create($input);
-        return redirect('/admin/products')->with('noticeA', 'El usuario fue creado correctamente');
+        Alert::success('Success Title', 'Success Message');
+        return redirect()->route('products.index');
     }
 
 
@@ -59,25 +54,27 @@ class productsController extends Controller
         return view('admin.products.edit', compact('product'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateFormProducts $request, $id)
     {
         $products = Product::findOrFail($id);
         $input = $request->all();
-        if ($file = $request->file('photo')) {
-            //verifica si anteriormente tiene una foto y procede a eliminarla para añadir una nueva
-            if ($products->photo) {
-                $name = $products->photo;
-                $dropFile = public_path() . "/images/" . $name;
-                unlink($dropFile);
-            }
-            
-            $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
-            $file->move('images', $temp_name);
-            $input['photo'] = $temp_name;
-        }
 
-        $products->update($input);
-        return redirect('admin/products')->with('noticeU', 'El producto ha sido actualizado');
+            if ($file = $request->file('photo')) {
+                //verifica si anteriormente tiene una foto y procede a eliminarla para añadir una nueva
+                if ($products->photo) {
+                    $name = $products->photo;
+                    $dropFile = public_path() . "/images/" . $name;
+                    unlink($dropFile);
+                }
+
+                $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
+                $file->move('images', $temp_name);
+                $input['photo'] = $temp_name;
+            }
+
+            $products->update($input);
+            Alert::info('Actualizado', 'El producto ha sido actualizado');
+            return redirect()->route('products.index');
     }
 
     public function destroy($id)
@@ -89,8 +86,8 @@ class productsController extends Controller
             unlink($dropFile);
         }
         $products->delete();
-
-        return redirect('admin/products')->with('noticeD', 'El producto fue eliminado correctamente');
+        Alert::error('Eliminado', 'El producto se ha eliminado');
+        return redirect('admin/products');
     }
 
     protected function random_string()

@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\ValidateFormUsers;
 
 class usersController extends Controller
 {
-
     public function __construct()
     {
         return $this->middleware('auth');
@@ -24,26 +25,21 @@ class usersController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(ValidateFormUsers $request)
     {
         $input = $request->all();
-        $input = $request->validate([
-            'name'=>['required', 'max:100'],
-            'email'=>['required', 'regex:/^.+@.+$/i', 'unique:users,email'],
-            "password"=>['required', 'min:8'],
-            "repeat_password"=>['required', 'same:password'],
-            'photo'=> 'mimes:jpeg,bmp,png,jpg'
-        ]);
 
         if ($file = $request->file('photo')) {
             $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
             $file->move('images', $temp_name);
             $input['photo'] = $temp_name;
         }
-        $input['password'] = bcrypt($request->password);
-        User::create($input);
 
-        return redirect('admin/users')->with('noticeA', 'El usuario fue creado correctamente');
+        $input['password'] = bcrypt($request->password);
+        
+        User::create($input);
+        Alert::success('Agregado', 'El usuario se ha agregado correctamente');
+        return redirect()->route('users.index');
     }
 
     public function show($id)
@@ -58,7 +54,7 @@ class usersController extends Controller
         return view('admin.users.edit', compact('users'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidateFormUsers $request, $id)
     {
         $users = User::findOrfail($id);
         $input = $request->all();
@@ -75,7 +71,8 @@ class usersController extends Controller
             $input['photo'] = $temp_name;
         }
         $users->update($input);
-        return redirect('admin/users')->with('noticeU', 'El usuario ha sido actualizado exitosamente');
+        Alert::info('Actualizado', "El usuario '$users->name ha sido actualizado exitosamente");
+        return redirect('admin/users');
     }
 
     public function destroy($id)
@@ -87,7 +84,8 @@ class usersController extends Controller
             unlink($originalFile);
         }
         $users->delete();
-        return redirect('admin/users')->with('noticeD', 'El usuario fue eliminado correctamente');
+        Alert::error('Eliminado', "El usuario '$users->name' fue eliminado  correctamente");
+        return redirect()->route('users.index');
     }
 
     protected function random_string()

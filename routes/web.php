@@ -5,8 +5,12 @@ use App\Product;
 
 Route::get('/', function () {
     $product = Product::all();
-    return view('welcome', compact('product'));
-});
+    return view('mio', compact('product'));
+})->name('root');
+Route::get('/productos', function () {
+    $product = Product::all();
+    return view('productos', compact('product'));
+})->name('productos');
 
 //ruta que sirve para ver la informacion del usuario logeado
 Route::get('admin/users/showInfo', function () {

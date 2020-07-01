@@ -62,7 +62,7 @@
 
                     <div class="col-lg-12 text-center">
                         <button type="submit" class="btn btn-success">
-                            Add Product
+                            Add User
                         </button>
                         <button type="reset" class="btn btn-warning">
                             Reset

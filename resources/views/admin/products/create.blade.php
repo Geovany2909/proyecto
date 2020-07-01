@@ -34,7 +34,8 @@
                         </ul>
                     </div>
                 @endif
-                 {!! Form::open(['action'=>'productsController@store','files'=>'true']) !!}
+                  {!! Form::open(['action'=>'productsController@store','files'=>'true']) !!}
+
                     @csrf
                     <div class="form-group">
                         <label>Name of product</label>
@@ -43,8 +44,8 @@
 
                     <div class="form-group">
                         <label>Category</label>
-                        <select name="category" class="form-control">
-                            <option value=" ">Seleccione una opcion </option>
+                        <select name="category" class="form-control" >
+                            <option value=" ">Seleccione una opcion</option>
                             <option value="Protesis">Protesis</option>
                             <option value="Ortesis">Ortesis</option>
                             <option value="Ortesis inferior">Ortesis inferior</option>
@@ -54,12 +55,12 @@
 
                     <div class="form-group">
                         <label>Add Photo</label>
-                        <input name="photo" type="file" accept="image/*" class="form-control-file" />
+                        <input name="photo" type="file" accept="image/*" class="form-control-file" value="{{ old('photo') }}" />
                     </div>
 
                     <div class="form-group">
                         <label>Description of product</label>
-                        <textarea name="description" class="form-control" rows="3"></textarea>
+                        <textarea name="description" class="form-control"  rows="3">{{ old('description') }}</textarea>
                     </div>
 
                     <div class="col-lg-12 text-center">
@@ -70,7 +71,7 @@
                             Reset
                         </button>
                     </div>
-                {!! Form::close() !!}
+                 {!! Form::close() !!}
             </div>
         </div>
         <!-- /#page-wrapper -->

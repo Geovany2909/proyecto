@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins|Anton|Aclonica|Julius+Sans+One|Lato|Prosto+One|Raleway|Roboto|Open+Sans+Condensed:700&display=swap');
+
+
+:root{
+    --rojo: #FF4136;
+    --azul : #001F5F;
+    --celeste: #0074D9;
+    --aqua: #7FDBFF;
+    --verdeAzulado: #39CCCC;
+    --oliva: #3D9970;
+    --verde : #2ECC40;
+    --limon: #01FF70;
+    --amarillo: #FFDC00;
+    --naranja: #FF851B;
+    --castanio: #85144b;
+    --fucsia: #F012BE;
+    --morado: #B10DC9;
+    --negro: #111111;
+    --gris: #AAAAAA;
+    --grisF: rgb(85,85,85);
+    --plateado: #DDDDDD;
+    --blanco: #FFFFFF;
+}

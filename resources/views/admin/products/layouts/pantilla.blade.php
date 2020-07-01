@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/sb-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     <link rel="stylesheet" href="{{ asset('css/alertify.min.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/themes/default.min.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/themes/default.min.css') }}" /> <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
@@ -69,8 +67,11 @@
 
 
 @yield('content')
-@yield('Mensaje')
+<div>
+    @yield('Mensaje')
+</div>
 
+@include('sweetalert::alert')
 <script src="{{ asset('js/jquery-1.10.2.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src="{{ asset('js/datatable.js') }}"></script>

@@ -32,12 +32,12 @@
 
                     <div class="form-group">
                         <label>UserName</label>
-                        <input class="form-control" value="{{ $users->name }}" placeholder="Enter name" />
+                        <input class="form-control" value="{{ $users->name }}" name="name" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" value="{{ $users->email }}" placeholder="Enter name" />
+                        <input type="email" class="form-control" name="email" value="{{ $users->email }}" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">

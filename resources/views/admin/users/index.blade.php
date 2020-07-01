@@ -65,8 +65,8 @@
                                 </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td> {{ $user->updated_at }}</td>
+                                <td>{{ date('d-M-Y', strtotime($user->created_at)) }}</td>
+                                <td> {{ date('d-M-Y', strtotime($user->updated_at)) }}</td>
                                 <td>
 
                                        <a href="{{ route('users.edit', $user->id) }}" class="edit" data-toggle="modal"><i
@@ -75,15 +75,7 @@
                                                     <a href="{{ route('users.destroy', $user->id) }}" class="delete" data-toggle="modal"><i
                                                         class="material-icons" data-toggle="tooltip" title="delete">&#xE872;</i></a>
                                         @endif
-
-                                                {{--  <a href="{{ route('users.destroy', $user->id) }}" onclick="event.preventDefault();
-                                                    document.getElementById('delete-form').submit();" class="delete" data-toggle="modal"><i
-                                                    class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>  --}}
-
                                 </td>
-                                   {{--  {!! Form::open(['method'=>'DELETE','id'=>'delete-form', 'action'=>['usersController@destroy', $user->id]]) !!}
-                                                @csrf
-                                {!! Form::close() !!}  --}}
                             </tr>
                             @empty
                                 @section('Mensaje')

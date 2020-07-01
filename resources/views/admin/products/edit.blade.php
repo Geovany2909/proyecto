@@ -22,6 +22,16 @@
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
+                 @if ($errors->any())
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                  {!! Form::model($product,['method'=>'PATCH','action'=>['productsController@update',$product->id],'files'=>true]) !!}
                  @csrf
                     <div class="form-group mx-auto d-block">
@@ -32,12 +42,12 @@
 
                     <div class="form-group">
                         <label>Name of product</label>
-                        <input class="form-control" value="{{ $product->name }}" placeholder="Enter name" />
+                        <input class="form-control" name="name" value="{{ $product->name }}" placeholder="Enter name" />
                     </div>
 
                     <div class="form-group">
                         <label>Category</label>
-                        <select  class="form-control">
+                        <select  class="form-control" name="category">
                             <option value="{{ $product->category }}">{{ $product->category }}</option>
                             <option value="Protesis">Protesis</option>
                             <option value="Ortesis">Ortesis</option>

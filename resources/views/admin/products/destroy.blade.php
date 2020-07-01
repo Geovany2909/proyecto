@@ -23,13 +23,15 @@
     		        <img src="https://i.pinimg.com/236x/9b/51/78/9b5178a8a761a2536322e6ca75c74240--wallpapers-android-backgrounds-wallpapers.jpg" alt="profile-sample1" class="background"/>
     		        <img src="/images/{{  $product->photo ? $product->photo : 'product-photoless-standart.png' }}" alt="profile-image" class="profile"/>
                     <div class="card-content">
-                    <h2>name: {{ $product->name }}</h2>
-                    <h4>category:  {{ $product->category }}</h4>
-                    <h4>create: {{ $product->created_at }}</h4>
+                    <h4>name: {{ $product->name }}</h4>
+                     <h5>Created: {{ date('d-M-Y', strtotime($product->created_at)) }}</h5>
+                     <h5>Updated: {{ date('d-M-Y', strtotime($product->updated_at)) }}</h5>
                     <div class="icon-block">
                         {!! Form::open(['method'=>'DELETE','id'=>'delete-form', 'action'=>['productsController@destroy', $product->id]]) !!}
                                                 @csrf
-                        <button class="btn btn-danger">Delete Product!!</button>
+                        <button class="btn btn-danger">
+                            Delete Product
+                        </button>
                         {!! Form::close() !!}
                     </div>
                     </div>
@@ -38,5 +40,5 @@
 
 </div>
 @endsection
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @endauth
