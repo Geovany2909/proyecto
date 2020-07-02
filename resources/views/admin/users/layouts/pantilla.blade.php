@@ -48,7 +48,6 @@
                 <ul class="nav navbar-nav navbar-right navbar-user">
 
                     <li class="dropdown user-dropdown">
-                        {{--  <img src="/images/{{ auth()->user()->photo ? auth()->user()->photo : 'user-photo-default.png' }}" width="80" alt="profile-image" />   --}}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
                                    {{ Auth::user()->name }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -65,7 +64,7 @@
                         </ul>
                     </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
 
 

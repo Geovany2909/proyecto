@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\ValidateFormProducts;
 
@@ -31,13 +31,14 @@ class productsController extends Controller
     public function store(ValidateFormProducts $request)
     {
         $input = $request->all();
-        if ($file = $request->file('photo')) {
+        if($file = $request->file('photo')){
             $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
-            $file->move('images', $temp_name);
+            $img = \Image::make($file);
+            $img->resize(320, 240)->save(public_path('images/'.$temp_name));
             $input['photo'] = $temp_name;
         }
         Product::create($input);
-        Alert::success('Success Title', 'Success Message');
+        Alert::success('Creado', 'El Producto se creo');
         return redirect()->route('products.index');
     }
 
@@ -66,9 +67,9 @@ class productsController extends Controller
                     $dropFile = public_path() . "/images/" . $name;
                     unlink($dropFile);
                 }
-
                 $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
-                $file->move('images', $temp_name);
+                $img = \Image::make($file);
+                $img->resize(320, 240)->save(public_path('images/' . $temp_name));
                 $input['photo'] = $temp_name;
             }
 

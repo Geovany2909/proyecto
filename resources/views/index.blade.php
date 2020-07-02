@@ -5,7 +5,7 @@
                 <img src="img/logo.png" alt="">
                 <p> <span>Ortopedia</span> Velasquez </p>
                 <hr>
-                <p> Carrer de l'Enginyer José Sirera 2 Avenida Cr Tomás Sala con Calle Soria. 46017 València Valencia</p>
+                <p> Carrer de lEnginyer José Sirera 2 Avenida Cr Tomás Sala con Calle Soria. 46017 València Valencia</p>
                 <hr>
                 <p> 960 05 57 68</p>
             </div>
@@ -23,7 +23,7 @@
                     <div class="box">
                         ¿Estás buscando una de las mejores ortopedias en Valencia? Sin duda somos una ortopedia técnica especializada en ayudas para la movilidad y el cuidado de enfermos en todos los casos; y una referencia dentro del sector de ortopedias baratas en Valencia.
                     </div>
-                    <div class="box">
+                    <div class="bkox">
                         En Ortopedia Velásquez estamos comprometidos con tu bienestar por encima de todo y para ello nos hemos especializado en atender las necesidades de nuestros clientes que hayan sufrido lesiones, algún accidente, o bien padezcan una enfermedad o cualquier secuela a posterior o problema de salud que pueda interferir ello en su capacidad de movilidad.
                     </div>
             </div>

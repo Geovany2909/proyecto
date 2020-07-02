@@ -18,34 +18,30 @@
                         3D del cráneo del bebé, y su función es la de corregir la forma del cráneo y ayudarlo a desarrollarse con normalidad.
                     </p>
                     <br>
-                    <a href="#" clas    s="btn btn3">MAS INFO</a>
+                    <a href="#" class="btn btn3">MAS INFO</a>
                 </div>
             </section>
         </div>
 
-        <!-- Productos -->
-    <div class="container">
-    <br>
-    <h4>Productos Ortopedia Velasquez</h2>
-	<br>
-	<div class="row" id="ads">
-    <!-- Category Card -->
-    @forelse ($product as $p)
-    <div class="col-md-4">
-        <div class="card rounded">
-            <div class="card-image">
-                <span class="card-notify-year">{{ date("Y",strtotime($p->created_at)) }}</span>
-                <img class="img-fluid" src="/images/{{ $p->photo ? $p->photo : 'nada.png' }}" alt="Alternate Text" />
-            </div>
-            <div class="card-image-overlay m-auto">
-                    <span class="card-detail-badge">{{ $p->name }}</span>
-                    <span class="card-detail-badge">{{ $p->category }}</span>
-            </div>
-        </div>
-    </div>
-    @empty
+        <div class="section">
+            <section class="prod">
+                <h2 class="heading">Productos de Ortopedia Velásquez</h2>
+                <div class="container">
+                    @forelse ($product as $p)
+                        <div class="prodBx">
+                        <div>
+                            <a href="#">
+                                <img src="/images/{{ $p->photo ? $p->photo : 'sinFoto.jpg' }}" alt="">
+                            </a>
+                                <h2>{{ $p->name }}</h2>
+                        </div>
+                    </div>
+                    @empty
 
-    @endforelse
+                    @endforelse
+                </div>
+            </section>
+        </div>
 
 
 </div>

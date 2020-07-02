@@ -6,21 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateFormUsers extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+    
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -39,8 +30,8 @@ class ValidateFormUsers extends FormRequest
             'name.min' => 'El :attribute debe de tener minimo 8 caracteres',
             'name.max' => 'El :attribute debe de tener maximo 64 caracteres',
             'email.regex' => 'El formato del :attribute es invalido',
-            'email.required' => 'El :attribute es requerido',
             'email.unique' => 'El email ya esta en uso',
+            'email.required' => 'El :attribute es requerido',
             'password.required'=>'El :attribute es requerido',
             'password.min'=>'El :attribute debe de tener minimo 8 caracteres',
             'repeat_password.required'=>'El :attribute es requerido',

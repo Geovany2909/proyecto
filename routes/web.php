@@ -5,7 +5,7 @@ use App\Product;
 
 Route::get('/', function () {
     $product = Product::all();
-    return view('mio', compact('product'));
+    return view('index', compact('product'));
 })->name('root');
 
 Route::get('/productos', function () {

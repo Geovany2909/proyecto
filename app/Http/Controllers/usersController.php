@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\ValidateFormUsers;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class usersController extends Controller
 {
@@ -16,7 +20,7 @@ class usersController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('name', 'desc')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -31,12 +35,13 @@ class usersController extends Controller
 
         if ($file = $request->file('photo')) {
             $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
-            $file->move('images', $temp_name);
+            $img = \Image::make($file);
+            $img->resize(320, 240)->save(public_path('images/' . $temp_name));
             $input['photo'] = $temp_name;
         }
 
         $input['password'] = bcrypt($request->password);
-        
+
         User::create($input);
         Alert::success('Agregado', 'El usuario se ha agregado correctamente');
         return redirect()->route('users.index');
@@ -54,25 +59,38 @@ class usersController extends Controller
         return view('admin.users.edit', compact('users'));
     }
 
-    public function update(ValidateFormUsers $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
+        $input = $request->only('name', 'email', 'photo');
+        $pass = $request->input('password');
+        $credentials = Auth::user();
         $users = User::findOrfail($id);
-        $input = $request->all();
 
-        if ($file = $request->file('photo')) {
-            if ($users->photo) {
-                $originalRut = $users->photo;
-                $originalFile = public_path() . "/images/" . $originalRut;
-                unlink($originalFile);
+           if (Hash::check($pass, $credentials->getAuthPassword())) {
+            if ($file = $request->file('photo')) {
+                if ($users->photo) {
+                    $originalRut = $users->photo;
+                    $originalFile = public_path() . "/images/" . $originalRut;
+                    unlink($originalFile);
+                }
+
+                $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
+                $img = \Image::make($file);
+                $img->resize(320, 240)->save(public_path('images/' . $temp_name));
+                $input['photo'] = $temp_name;
             }
+            $users->update($input);
+            Alert::info('Actualizado', "El usuario $users->name ha sido actualizado exitosamente");
+            return redirect('admin/users');
+           } else{
+                Alert::error('Error', 'La contraseña es incorrecta');
+               return redirect()->route('users.edit',$users->id);
+           }
+            // $users->update($input);
 
-            $temp_name = $this->random_string() . '.' . $file->getClientOriginalExtension();
-            $file->move('images', $temp_name);
-            $input['photo'] = $temp_name;
-        }
-        $users->update($input);
-        Alert::info('Actualizado', "El usuario '$users->name ha sido actualizado exitosamente");
-        return redirect('admin/users');
+
+
+
     }
 
     public function destroy($id)

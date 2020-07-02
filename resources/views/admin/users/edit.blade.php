@@ -21,7 +21,18 @@
                 </div>
             </div>
             <!-- /.row -->
+             @if ($errors->any())
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <div class="col-lg-12">
+
                  {!! Form::model($users,['method'=>'PATCH','action'=>['usersController@update',$users->id],'files'=>true]) !!}
                  @csrf
                     <div class="form-group mx-auto d-block">
@@ -41,6 +52,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Confirm Email</label>
+                        <input type="email" value="{{ old('repeat_email') }}" name="repeat_email" class="form-control" placeholder="Enter confirm email" />
+                    </div>
+                    @if (auth()->id() == $users->id)
+                    <div class="form-group">
+                        <label>Confirm Pass</label>
+                        <input class="form-control" type="password"  name="password" placeholder="Enter name" />
+
+                    </div>
+                    @endif
+
+
+                    <div class="form-group">
                         @if($users->photo)
                             <label><strong>Foto actual "{{ $users->photo }}"</strong>, Modificar?</label>
                             @else
@@ -48,7 +72,6 @@
                         @endif
                         <input type="file" placeholder="" name="photo" class="form-control" accept="image/*" />
                     </div>
-
 
                     <div class="col-lg-12 text-center">
                     <button type="submit" class="btn btn-success">
