@@ -73,10 +73,10 @@ section .container .user .formBx form h2{
     text-align: center;
     width: 100%;
     margin-bottom: 10px;
-    
+
 }
 
-section .container .user .formBx form input{
+section .container .user .formBx form   input{
     position: relative;
     width: 100%;
     padding: 10px;
@@ -118,46 +118,17 @@ section .container .user .formBx form .signup a{
     color: #115294;
 }
 
-section .container .singupBx{
-    pointer-events: none;
+/* Mensaje de error */
+.mensaje{
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+    margin-top: 20px;
+    text-align: left;
+    padding: 6px;
+    color: red;
 }
 
-section .container.active .singupBx{
-    pointer-events: initial;
-}
-
-section .container .singupBx .formBx{
-    left: 100%;
-}
-
-section .container.active .singupBx .formBx{
-    left: 0;
-}
-
-section .container .singupBx .imgBx{
-    left: -100%;
-}
-
-section .container.active .singupBx .imgBx{
-    left: 0;
-}
-
-/* Inicio de sesion */
-section .container .singinBx .formBx{
-    left: 0;
-}
-
-section .container.active .singinBx .formBx{
-    left: 100%;
-}
-
-section .container .singinBx .imgBx{
-    left: 0%;
-}
-
-section .container.active .singinBx .imgBx{
-    left: -100%;
-}
 
 
 @media (max-width: 991px){

@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\productsController;
 use App\Product;
+use App\User;
 
 Route::get('/', function () {
     $product = Product::all();
-    return view('index', compact('product'));
+    $user = User::all();
+    return view('index', compact('product', 'user'));
 })->name('root');
 
 Route::get('/productos', function () {
